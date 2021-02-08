@@ -9,7 +9,7 @@ import (
 	"../utils"
 )
 
-func  GetUser(c *gin.Context) {
+func GetUser(c *gin.Context) {
 	userIdParam := c.Param("user_id")
 	userId, err := strconv.ParseInt(userIdParam, 10, 64)
 	if err != nil {

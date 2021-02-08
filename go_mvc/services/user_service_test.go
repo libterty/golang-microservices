@@ -19,18 +19,18 @@ func init() {
 	domains.UserDao = &usersDaoMock{}
 }
 
-type usersDaoMock struct {}
+type usersDaoMock struct{}
 
 func (m *usersDaoMock) GetUser(userId int64) (*domains.User, *utils.ApplicationError) {
-	return getUserFunction(userId )
+	return getUserFunction(userId)
 }
 
 func TestUserNotFound(t *testing.T) {
 	getUserFunction = func(userId int64) (*domains.User, *utils.ApplicationError) {
 		return nil, &utils.ApplicationError{
 			StatusCode: http.StatusNotFound,
-			Message: "User was not found: 0",
-			Code: "not_found",
+			Message:    "User was not found: 0",
+			Code:       "not_found",
 		}
 	}
 	user, err := UserService.GetUser(0)
@@ -41,7 +41,7 @@ func TestUserNotFound(t *testing.T) {
 	assert.EqualValues(t, "not_found", err.Code)
 }
 
-func TestUserFound(t *testing.T)  {
+func TestUserFound(t *testing.T) {
 	getUserFunction = func(userId int64) (*domains.User, *utils.ApplicationError) {
 		return &domains.User{
 			Id: 1,

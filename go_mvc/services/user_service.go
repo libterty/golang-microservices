@@ -5,7 +5,7 @@ import (
 	"../utils"
 )
 
-type userService struct {}
+type userService struct{}
 
 var (
 	UserService userService

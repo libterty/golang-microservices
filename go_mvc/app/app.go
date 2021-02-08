@@ -9,7 +9,7 @@ var (
 	router *gin.Engine
 )
 
-func init()  {
+func init() {
 	router = gin.Default()
 }
 

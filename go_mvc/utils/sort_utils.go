@@ -1,11 +1,11 @@
 package utils
 
-func BubbleSort(elements []int)  []int {
+func BubbleSort(elements []int) []int {
 	keepRunning := true
 	for keepRunning {
 		keepRunning = false
 
-		for i := 0; i < len(elements) - 1; i++ {
+		for i := 0; i < len(elements)-1; i++ {
 			if elements[i] > elements[i+1] {
 				temp := elements[i]
 				elements[i] = elements[i+1]
@@ -14,5 +14,5 @@ func BubbleSort(elements []int)  []int {
 			}
 		}
 	}
-	return  elements
+	return elements
 }
