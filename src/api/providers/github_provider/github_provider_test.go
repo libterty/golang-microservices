@@ -13,7 +13,7 @@ import (
 	"../../domains/github"
 )
 
-func TestMain(m *testing.M)  {
+func TestMain(m *testing.M) {
 	restclient.StartMockUps()
 	os.Exit(m.Run())
 }
@@ -51,7 +51,7 @@ func TestCreateRepoRestClientInvalidResponseBody(t *testing.T) {
 		HttpMethod: http.MethodPost,
 		Response: &http.Response{
 			StatusCode: http.StatusCreated,
-			Body: invalidCloser,
+			Body:       invalidCloser,
 		},
 	})
 
@@ -70,7 +70,7 @@ func TestCreateRepoRestClientInvalidErrorInterface(t *testing.T) {
 		HttpMethod: http.MethodPost,
 		Response: &http.Response{
 			StatusCode: http.StatusUnauthorized,
-			Body: ioutil.NopCloser(strings.NewReader(`{"message": 1}`)),
+			Body:       ioutil.NopCloser(strings.NewReader(`{"message": 1}`)),
 		},
 	})
 
@@ -89,7 +89,7 @@ func TestCreateRepoRestClientUnAuthorize(t *testing.T) {
 		HttpMethod: http.MethodPost,
 		Response: &http.Response{
 			StatusCode: http.StatusUnauthorized,
-			Body: ioutil.NopCloser(strings.NewReader(`{"message": "Requires authentication","documentation_url": ""}`)),
+			Body:       ioutil.NopCloser(strings.NewReader(`{"message": "Requires authentication","documentation_url": ""}`)),
 		},
 	})
 
@@ -108,7 +108,7 @@ func TestCreateRepoRestClientSuccessWithInvalidResponse(t *testing.T) {
 		HttpMethod: http.MethodPost,
 		Response: &http.Response{
 			StatusCode: http.StatusCreated,
-			Body: ioutil.NopCloser(strings.NewReader(`{"id": "123"}`)),
+			Body:       ioutil.NopCloser(strings.NewReader(`{"id": "123"}`)),
 		},
 	})
 
@@ -127,7 +127,7 @@ func TestCreateRepoRestClientSuccess(t *testing.T) {
 		HttpMethod: http.MethodPost,
 		Response: &http.Response{
 			StatusCode: http.StatusCreated,
-			Body: ioutil.NopCloser(strings.NewReader(`{"id": 123,"name": "lib","full_name":"lib"}`)),
+			Body:       ioutil.NopCloser(strings.NewReader(`{"id": 123,"name": "lib","full_name":"lib"}`)),
 		},
 	})
 

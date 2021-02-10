@@ -20,7 +20,7 @@ type Mock struct {
 	Err        error
 }
 
-func GetMockId(httpMethod string, url string) string  {
+func GetMockId(httpMethod string, url string) string {
 	return fmt.Sprintf("%s_%s", httpMethod, url)
 }
 
@@ -28,7 +28,7 @@ func StartMockUps() {
 	enabledMocks = true
 }
 
-func FlushMockUps()  {
+func FlushMockUps() {
 	mocks = make(map[string]*Mock)
 }
 
