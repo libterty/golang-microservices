@@ -4,8 +4,8 @@ import (
 	"../../clients/restclient"
 	"../../domains/repositories"
 	"../../utils/errors"
+	"../../utils/test_utils"
 	"encoding/json"
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"net/http"
@@ -22,10 +22,8 @@ func TestMain(m *testing.M) {
 
 func TestCreateRepoInvalidJsonRequest(t *testing.T) {
 	res := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(res)
 	req, _ := http.NewRequest(http.MethodPost, "/repostiories", strings.NewReader(``))
-	c.Request = req
-
+	c := test_utils.GetMockedContext(req, res)
 	CreateRepo(c)
 
 	assert.EqualValues(t, http.StatusBadRequest, res.Code)
@@ -38,11 +36,6 @@ func TestCreateRepoInvalidJsonRequest(t *testing.T) {
 }
 
 func TestCreateRepoFromGitHub(t *testing.T) {
-	res := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(res)
-	req, _ := http.NewRequest(http.MethodPost, "/repostiories", strings.NewReader(`{"name": "lib_test"}`))
-	c.Request = req
-
 	restclient.FlushMockUps()
 	restclient.AddMockUp(restclient.Mock{
 		Url:        "https://api.github.com/user/repos",
@@ -53,6 +46,9 @@ func TestCreateRepoFromGitHub(t *testing.T) {
 		},
 	})
 
+	res := httptest.NewRecorder()
+	req, _ := http.NewRequest(http.MethodPost, "/repostiories", strings.NewReader(`{"name": "lib_test"}`))
+	c := test_utils.GetMockedContext(req, res)
 	CreateRepo(c)
 
 	assert.EqualValues(t, http.StatusUnauthorized, res.Code)
@@ -65,11 +61,6 @@ func TestCreateRepoFromGitHub(t *testing.T) {
 }
 
 func TestCreateRepoSuccess(t *testing.T) {
-	res := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(res)
-	req, _ := http.NewRequest(http.MethodPost, "/repostiories", strings.NewReader(`{"name": "lib_test"}`))
-	c.Request = req
-
 	restclient.FlushMockUps()
 	restclient.AddMockUp(restclient.Mock{
 		Url:        "https://api.github.com/user/repos",
@@ -80,6 +71,9 @@ func TestCreateRepoSuccess(t *testing.T) {
 		},
 	})
 
+	res := httptest.NewRecorder()
+	req, _ := http.NewRequest(http.MethodPost, "/repostiories", strings.NewReader(`{"name": "lib_test"}`))
+	c := test_utils.GetMockedContext(req, res)
 	CreateRepo(c)
 
 	assert.EqualValues(t, http.StatusCreated, res.Code)
