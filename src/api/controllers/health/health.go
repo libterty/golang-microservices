@@ -9,6 +9,6 @@ const (
 	health = "Server is healthy"
 )
 
-func HealthCheck(ctx *gin.Context)  {
+func HealthCheck(ctx *gin.Context) {
 	ctx.String(http.StatusOK, health)
 }

@@ -1,8 +1,8 @@
 package app
 
 import (
-	"../controllers/repositories"
 	"../controllers/health"
+	"../controllers/repositories"
 )
 
 func mapUrls() {
