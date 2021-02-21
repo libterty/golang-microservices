@@ -7,5 +7,6 @@ import (
 
 func mapUrls() {
 	router.GET("/health", health.HealthCheck)
-	router.POST("/repostiories", repositories.CreateRepo)
+	router.POST("/repostiory", repositories.CreateRepo)
+	router.POST("/repostiories", repositories.CreateRepos)
 }
